@@ -1,0 +1,52 @@
+
+/*==============================
+  Python project submission form
+==============================*/
+.send-code-section {
+  width: min(920px, calc(100% - 32px));
+  margin: 56px auto 110px;
+  padding: clamp(20px, 4vw, 38px);
+  box-sizing: border-box;
+  border: 1px solid #e1e7ef;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 18px 55px rgba(20, 38, 66, .08);
+  color: #172033;
+  direction: rtl;
+}
+.send-code-heading { text-align: center; margin-bottom: 30px; }
+.send-code-kicker { font: 700 .72rem/1.5 monospace; letter-spacing: .12em; color: #168b88; }
+.send-code-heading h2 { margin: 8px 0; font-size: clamp(1.45rem, 4vw, 2rem); }
+.send-code-heading p { margin: 0; color: #687386; }
+.send-code-form { display: grid; gap: 20px; }
+.send-code-field { display: grid; gap: 9px; min-width: 0; }
+.send-code-field label { font-weight: 700; }
+.send-code-field label span { color: #dc2626; }
+.send-code-field label small { color: #778195; font-weight: 400; }
+.send-code-field input {
+  width: 100%; box-sizing: border-box; padding: 13px 15px;
+  border: 1px solid #d4dce7; border-radius: 11px; background: #fbfcfe;
+  color: #172033; font: inherit; direction: rtl;
+}
+.send-code-field input:focus { outline: 2px solid #9bdad7; border-color: #168b88; }
+.python-editor { overflow: hidden; border-radius: 14px; border: 1px solid #202b3b; background: #101722; color: #e8edf5; direction: ltr; }
+.python-editor-top { display: flex; align-items: center; gap: 13px; padding: 12px 15px; background: #1b2635; color: #e6edf7; font: 13px/1.4 monospace; }
+.python-dots { display: flex; gap: 5px; }
+.python-dots i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #f87171; }
+.python-dots i:nth-child(2) { background: #fbbf24; }
+.python-dots i:nth-child(3) { background: #34d399; }
+.python-badge { margin-left: auto; color: #8dd8d2; }
+.python-editor-body { display: flex; align-items: stretch; min-height: 270px; max-height: 520px; }
+.python-line-numbers { flex: 0 0 42px; box-sizing: border-box; margin: 0; padding: 17px 10px; overflow: hidden; text-align: right; white-space: pre; user-select: none; color: #64748b; background: #141d29; border-right: 1px solid #283445; font: 14px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace; }
+#python-code { display: block; flex: 1; min-width: 0; min-height: 270px; max-height: 520px; resize: vertical; box-sizing: border-box; border: 0; outline: 0; border-radius: 0; padding: 17px 16px; background: #101722; color: #d8e7f7; caret-color: #5eead4; white-space: pre; overflow: auto; direction: ltr; text-align: left; tab-size: 4; font: 14px/1.65 ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; }
+#python-code::placeholder { color: #66758a; opacity: 1; }
+.python-editor-footer { display: flex; justify-content: space-between; gap: 10px; padding: 9px 13px; background: #1b2635; color: #9eacbf; font-size: .78rem; direction: rtl; }
+.send-code-submit { justify-self: start; border: 0; border-radius: 11px; padding: 13px 24px; background: #167f7c; color: #fff; font: inherit; font-weight: 700; cursor: pointer; transition: background .2s, transform .2s; }
+.send-code-submit:hover { background: #116a68; transform: translateY(-1px); }
+.send-code-submit span { margin-right: 8px; }
+.send-code-note { margin: -8px 0 0; color: #748095; font-size: .86rem; }
+@media (max-width: 520px) {
+ .send-code-section { width: calc(100% - 20px); padding: 18px 13px; margin-top: 36px; }
+ .python-editor-body, #python-code { min-height: 230px; }
+ .python-editor-footer { font-size: .7rem; }
+}

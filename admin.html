@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>پنل مدیریت | مدرسه انرژی اتمی</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1020;--card:#141c31;--line:#293550;--text:#f3f6ff;--muted:#aab6d3;--accent:#70e1c1;--danger:#ff9a9a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top right,#172b45 0,transparent 40%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;line-height:1.8}
+main{width:min(920px,92%);margin:36px auto}.hero{text-align:center;margin-bottom:24px}.hero h1{margin:0;font-size:clamp(1.5rem,4vw,2.3rem)}.hero p{color:var(--muted);margin:8px 0}
+.card{background:rgba(20,28,49,.95);border:1px solid var(--line);border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 14px 36px #0003}
+h2{font-size:1.15rem;margin-top:0}label{display:block;margin:12px 0 5px;font-weight:bold}input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid #394866;background:#0c1427;color:var(--text);font:inherit}textarea{min-height:180px;resize:vertical}button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:bold;cursor:pointer;background:var(--accent);color:#06271e;margin-top:12px}button.secondary{background:#293550;color:var(--text)}button.danger{background:#512b39;color:#ffe1e1}.actions{display:flex;gap:10px;flex-wrap:wrap}.hidden{display:none!important}.status{padding:10px 12px;border-radius:10px;background:#0b1425;color:var(--muted);margin-top:12px;white-space:pre-wrap}.note{font-size:.92rem;color:var(--muted)}.warning{border-color:#735a31}.post{border-top:1px solid var(--line);padding:12px 0}.post small{color:var(--muted)}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--accent);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <span class="pill">Atomic School</span>
+    <h1>پنل مدیریت سایت</h1>
+    <p>ورود امن مدیران و ثبت کدها و مطالب پروژه</p>
+  </header>
+
+  <section class="card warning">
+    <h2>قبل از راه‌اندازی</h2>
+    <p class="note">این فایل به‌تنهایی احراز هویت انجام نمی‌دهد. ابتدا باید پروژه Firebase بسازید، تنظیمات آن را در کد وارد کنید و قوانین Firestore داخل فایل <b>firestore.rules</b> را منتشر کنید. ایمیل‌هایی که مجازند باید در قوانین امنیتی نیز تعریف شوند. صرفاً مخفی‌کردن یک صفحه یا بررسی ایمیل در مرورگر، امنیت ایجاد نمی‌کند.</p>
+  </section>
+
+  <section id="loginCard" class="card">
+    <h2>ورود مدیران</h2>
+    <p class="note">هر مدیر باید با حساب خودش وارد شود. برای این نمونه، حساب‌های ایمیل/رمز عبور Firebase Authentication استفاده می‌شود.</p>
+    <label for="email">ایمیل</label><input id="email" type="email" autocomplete="username" placeholder="name@example.com">
+    <label for="password">رمز عبور حساب</label><input id="password" type="password" autocomplete="current-password" placeholder="رمز عبور حساب Firebase">
+    <div class="actions"><button id="loginBtn">ورود</button><button id="resetBtn" class="secondary">ارسال لینک بازیابی رمز</button></div>
+    <div id="loginStatus" class="status" role="status">ابتدا تنظیمات Firebase را در پایین فایل وارد کنید.</div>
+  </section>
+
+  <section id="panel" class="hidden">
+    <div class="card">
+      <div class="actions" style="justify-content:space-between;align-items:center">
+        <h2 style="margin:0">مدیریت محتوا</h2><button id="logoutBtn" class="secondary">خروج از حساب</button>
+      </div>
+      <p id="who" class="note"></p>
+      <label for="title">عنوان مطلب / کد</label><input id="title" maxlength="120" placeholder="مثلاً ماشین‌حساب پایتون">
+      <label for="kind">نوع محتوا</label><input id="kind" maxlength="40" value="کد پایتون" placeholder="مثلاً آموزش، پروژه، کد پایتون">
+      <label for="description">توضیح کوتاه</label><textarea id="description" style="min-height:90px" maxlength="1500" placeholder="این پروژه چه کاری انجام می‌دهد؟"></textarea>
+      <label for="code">کد یا متن محتوا</label><textarea id="code" placeholder="کد یا متن را اینجا وارد کنید"></textarea>
+      <div class="actions"><button id="saveBtn">ذخیره در پایگاه داده</button><button id="refreshBtn" class="secondary">تازه‌سازی فهرست</button></div>
+      <div id="panelStatus" class="status" role="status"></div>
+    </div>
+    <div class="card">
+      <h2>مطالب ذخیره‌شده</h2>
+      <p class="note">این فهرست از Firestore خوانده می‌شود. برای نمایش خودکار مطالب روی صفحه اصلی، باید صفحه اصلی سایت نیز به Firestore متصل شود؛ ذخیره‌سازی به‌تنهایی فایل‌های GitHub Pages را تغییر نمی‌دهد.</p>
+      <div id="posts"><p class="note">هنوز بارگذاری نشده است.</p></div>
+    </div>
+  </section>
+</main>
+
+<!--
+راه‌اندازی:
+1) در Firebase Console یک پروژه بسازید و Authentication > Email/Password را فعال کنید.
+2) سه حساب مدیر ایجاد کنید؛ هر سه ایمیل را در firestore.rules قرار دهید.
+3) یک Web App بسازید و مقادیر firebaseConfig را جایگزین کنید.
+4) Firestore Database را ایجاد کنید و firestore.rules را منتشر کنید.
+5) فایل را روی GitHub Pages بگذارید. هرگز کلید خصوصی/توکن GitHub را در این فایل قرار ندهید.
+-->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+// TODO: مقادیر را از Firebase Console > Project settings > Your apps کپی کنید.
+const firebaseConfig = {
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  appId: "YOUR_FIREBASE_APP_ID"
+};
+
+const configured = !Object.values(firebaseConfig).some(v => String(v).includes("YOUR_"));
+const $ = id => document.getElementById(id);
+const loginStatus = $('loginStatus');
+const panelStatus = $('panelStatus');
+let auth, db;
+
+if (configured) {
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  onAuthStateChanged(auth, async user => {
+    if (user) {
+      $('loginCard').classList.add('hidden');
+      $('panel').classList.remove('hidden');
+      $('who').textContent = `وارد شده‌اید: ${user.email || 'حساب مدیر'}`;
+      await loadPosts();
+    } else {
+      $('loginCard').classList.remove('hidden');
+      $('panel').classList.add('hidden');
+    }
+  });
+} else {
+  loginStatus.textContent = 'هنوز راه‌اندازی نشده: ابتدا firebaseConfig را با مقادیر پروژه Firebase خودتان جایگزین کنید.';
+}
+
+$('loginBtn').addEventListener('click', async () => {
+  if (!configured) return loginStatus.textContent = 'ابتدا تنظیمات Firebase را وارد کنید.';
+  const email = $('email').value.trim(), password = $('password').value;
+  if (!email || !password) return loginStatus.textContent = 'ایمیل و رمز عبور را وارد کنید.';
+  loginStatus.textContent = 'در حال ورود…';
+  try { await signInWithEmailAndPassword(auth, email, password); }
+  catch (e) { loginStatus.textContent = 'ورود ناموفق بود. ایمیل/رمز را بررسی کنید و مطمئن شوید حساب در Firebase ساخته شده است.'; }
+});
+$('resetBtn').addEventListener('click', async () => {
+  if (!configured) return loginStatus.textContent = 'ابتدا تنظیمات Firebase را وارد کنید.';
+  const email = $('email').value.trim();
+  if (!email) return loginStatus.textContent = 'ابتدا ایمیل را وارد کنید.';
+  try { await sendPasswordResetEmail(auth, email); loginStatus.textContent = 'اگر حسابی با این ایمیل وجود داشته باشد، لینک بازیابی ارسال می‌شود.'; }
+  catch (e) { loginStatus.textContent = 'ارسال لینک ممکن نشد. تنظیمات Authentication را بررسی کنید.'; }
+});
+$('logoutBtn').addEventListener('click', async () => { if (auth) await signOut(auth); });
+$('saveBtn').addEventListener('click', async () => {
+  const user = auth?.currentUser;
+  if (!user) return panelStatus.textContent = 'ابتدا وارد شوید.';
+  const title = $('title').value.trim(), kind = $('kind').value.trim(), description = $('description').value.trim(), code = $('code').value;
+  if (!title || !code.trim()) return panelStatus.textContent = 'عنوان و کد/متن الزامی هستند.';
+  $('saveBtn').disabled = true;
+  try {
+    await addDoc(collection(db, 'sitePosts'), { title, kind, description, code, createdBy: user.email, createdAt: serverTimestamp() });
+    panelStatus.textContent = 'محتوا در پایگاه داده ذخیره شد. برای نمایش روی صفحه اصلی، باید اتصال صفحه اصلی نیز تنظیم شود.';
+    $('title').value = ''; $('description').value = ''; $('code').value = '';
+    await loadPosts();
+  } catch (e) {
+    panelStatus.textContent = 'ذخیره انجام نشد. احتمالاً قوانین Firestore یا دسترسی مدیران هنوز تنظیم نشده است.';
+  } finally { $('saveBtn').disabled = false; }
+});
+$('refreshBtn').addEventListener('click', loadPosts);
+
+async function loadPosts() {
+  if (!db || !auth?.currentUser) return;
+  const target = $('posts');
+  target.innerHTML = '<p class="note">در حال بارگذاری…</p>';
+  try {
+    const q = query(collection(db, 'sitePosts'), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    if (snap.empty) { target.innerHTML = '<p class="note">هنوز مطلبی ثبت نشده است.</p>'; return; }
+    target.replaceChildren();
+    snap.forEach(docSnap => {
+      const p = docSnap.data(), article = document.createElement('article');
+      article.className = 'post';
+      const h = document.createElement('strong'); h.textContent = p.title || 'بدون عنوان';
+      const meta = document.createElement('small'); meta.textContent = ` — ${p.kind || 'محتوا'} | ثبت‌کننده: ${p.createdBy || 'نامشخص'}`;
+      const d = document.createElement('p'); d.textContent = p.description || '';
+      const pre = document.createElement('pre'); pre.style.cssText = 'white-space:pre-wrap;overflow-wrap:anywhere;background:#0c1427;padding:12px;border-radius:8px'; pre.textContent = p.code || '';
+      article.append(h, meta, d, pre); target.append(article);
+    });
+  } catch (e) { target.innerHTML = '<p class="note">خواندن فهرست ممکن نشد. تنظیمات و قوانین Firestore را بررسی کنید.</p>'; }
+}
+</script>
+</body>
+</html>

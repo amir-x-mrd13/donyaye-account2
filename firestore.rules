@@ -1,0 +1,19 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in [
+          "amir.mrd186@gmail.com",
+          "FRIEND_EMAIL_HERE",
+          "TEACHER_EMAIL_HERE"
+        ];
+    }
+
+    match /sitePosts/{postId} {
+      allow read, create: if isAdmin();
+      allow update, delete: if false;
+    }
+  }
+}
