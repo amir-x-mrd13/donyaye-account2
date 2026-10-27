@@ -201,3 +201,15 @@ main {
 }
 
 /******img styles finished*******/
+
+/* ===== Visual polish: appearance only ===== */
+.call-box {
+  background: linear-gradient(145deg,#1d2a40,#111a29);
+  border-color: #30445e; box-shadow: 0 18px 45px #0003;
+  transition: border-color .25s,transform .25s;
+}
+.call-box:hover { border-color: #347c91; }
+.call-box .call-title { font-weight: 800; }
+.call-box .call-text { line-height: 2; color: #b6c5d8; }
+.call-box .bale-img { box-shadow: 0 8px 22px #00d49118; }
+.blob { box-shadow: 0 16px 40px #0004; }

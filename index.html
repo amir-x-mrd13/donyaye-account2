@@ -6,7 +6,6 @@
     <title>Atomic-school</title>
     <link rel="stylesheet" href="./asesst/styles/reset.css" />
     <link rel="stylesheet" href="./asesst/styles/styles.css" />
-    <link rel="stylesheet" href="./asesst/styles/send-code.css" />
   </head>
   <body>
     <!------------------  Header  ------------------>
@@ -62,6 +61,11 @@
         >
       </div>
 
+      <section class="portal-shortcuts" aria-label="بخش‌های سایت">
+        <a href="./student.html">🎓 ورود دانش‌آموز</a>
+        <a href="./teacher.html">🔐 پنل استاد</a>
+      </section>
+
       <!--------------- project items -------------->
       <div class="project-container">
         <!------ AI ------>
@@ -108,76 +112,8 @@
           </div>
         </section>
       </div>
-
-      <!-- بخش ارسال کد پروژه -->
-      <section class="send-code-section" id="send-code">
-        <div class="send-code-heading">
-          <span class="send-code-kicker">SUBMIT YOUR PROJECT</span>
-          <h2>ارسال کد پروژه</h2>
-          <p>کدت رو اینجا قرار بده و برای بررسی ارسال کن.</p>
-        </div>
-
-        <!-- فرم ارسال از FormSubmit استفاده می‌کند؛ برای فعال‌شدن، ارسال اولیه و تأیید ایمیل لازم است. -->
-        <form class="send-code-form" action="https://formsubmit.co/amir.mrd186@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="پروژه جدید - سایت مدرسه انرژی اتمی">
-          <input type="hidden" name="_template" value="table">
-          <input type="hidden" name="_captcha" value="true">
-
-          <div class="send-code-field">
-            <label for="student-name">نام و نام خانوادگی <span>*</span></label>
-            <input id="student-name" name="نام و نام خانوادگی" type="text"
-                   autocomplete="name" maxlength="100" required
-                   placeholder="مثلاً علی احمدی">
-          </div>
-
-          <div class="send-code-field">
-            <label for="aparat-url">لینک آپارات <small>اختیاری</small></label>
-            <input id="aparat-url" name="لینک آپارات" type="url"
-                   placeholder="https://www.aparat.com/...">
-          </div>
-
-          <div class="send-code-field">
-            <label for="python-code">کد پروژه پایتون <span>*</span></label>
-            <div class="python-editor">
-              <div class="python-editor-top">
-                <div class="python-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-                <span>main.py</span>
-                <span class="python-badge">Python 3</span>
-              </div>
-              <div class="python-editor-body">
-                <pre class="python-line-numbers" id="python-lines" aria-hidden="true">1</pre>
-                <textarea id="python-code" name="کد پروژه" required
-                  spellcheck="false" autocapitalize="off" autocomplete="off"
-                  wrap="off" aria-label="کد پروژه پایتون"
-                  placeholder="# کد پایتون خود را اینجا قرار بده&#10;print('Hello, world!')"></textarea>
-              </div>
-              <div class="python-editor-footer"><span>متن کد را می‌توانی مستقیم Paste کنی.</span><span id="python-count">0 خط</span></div>
-            </div>
-          </div>
-
-          <button class="send-code-submit" type="submit">ارسال پروژه <span aria-hidden="true">↗</span></button>
-          <p class="send-code-note">موارد ستاره‌دار اجباری هستند. قبل از ارسال، کدت را بررسی کن.</p>
-        </form>
-      </section>
-
     </main>
 
-    <script>
-      (() => {
-        const code = document.getElementById('python-code');
-        const lines = document.getElementById('python-lines');
-        const count = document.getElementById('python-count');
-        if (!code || !lines || !count) return;
-        const updateLines = () => {
-          const total = Math.max(1, code.value.split('\\n').length);
-          lines.textContent = Array.from({length: total}, (_, i) => i + 1).join('\\n');
-          count.textContent = total + ' خط';
-        };
-        code.addEventListener('input', updateLines);
-        code.addEventListener('scroll', () => { lines.scrollTop = code.scrollTop; });
-        updateLines();
-      })();
-    </script>
     <script src="./main.js"></script>
   </body>
 </html>

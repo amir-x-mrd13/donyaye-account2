@@ -612,3 +612,94 @@
         margin-left: 60px;
     }
 }
+/* Student and teacher portal shortcuts */
+.portal-shortcuts {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 22px auto;
+  padding: 0 16px;
+}
+.portal-shortcuts a {
+  display: inline-block;
+  background: #176db0;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: transform .2s, background .2s;
+}
+.portal-shortcuts a:hover { background: #12558c; transform: translateY(-2px); }
+
+
+/* ===== Visual polish: appearance only ===== */
+:root { color-scheme: dark; }
+body {
+  background: radial-gradient(ellipse at 12% 0%, #172c46 0, #101722 42%, #0b1018 100%);
+  color: #edf4ff;
+  font-family: Vazir, Tahoma, sans-serif;
+}
+.main-title { font-weight: 800; letter-spacing: -.3px; }
+.main-title::after {
+  content: ""; display: block; width: 76px; height: 4px; margin: 14px auto 0;
+  border-radius: 99px; background: linear-gradient(90deg,#28c5c5,#579cff);
+}
+.main-up-text { color: #9aaec6; }
+.main-navbar { gap: 12px; flex-wrap: wrap; }
+.main-navbar .main-navbar-text {
+  background: #172538; color: #dcecff; border: 1px solid #2c4059;
+  border-radius: 14px; padding: 10px 24px; transition: .22s ease;
+}
+.main-navbar .main-navbar-hover:hover,
+.main-navbar .main-navbar-active {
+  background: linear-gradient(135deg,#168eae,#326ee6); color: #fff;
+  border-color: transparent; box-shadow: 0 8px 24px #168eae35;
+}
+.project-container { gap: 24px; }
+.project-container .ai-project,
+.project-container .wheater-project {
+  overflow: hidden; border: 1px solid #26384e; border-radius: 22px;
+  background: linear-gradient(160deg,#1b293b,#121b28);
+  box-shadow: 0 16px 40px #0003; transition: transform .25s,border-color .25s,box-shadow .25s;
+}
+.project-container .ai-project:hover,
+.project-container .wheater-project:hover {
+  transform: translateY(-6px); border-color: #318eae; box-shadow: 0 20px 45px #0005;
+}
+.project-container .ai-img,
+.project-container .wheater-img { object-fit: cover; }
+.project-container .ai-down,
+.project-container .wheater-down { padding: 22px; }
+.project-container .ai-title,
+.project-container .wheater-title { color: #f3f7ff; font-weight: 800; }
+.project-container .ai-text,
+.project-container .wheater-text { color: #a9b9cd; line-height: 1.9; }
+.project-container .ai-lang,
+.project-container .wheater-lang,
+.project-container .ai-Surface,
+.project-container .wheater-Surface {
+  border-radius: 999px; padding: 4px 11px; background: #20384a; color: #aee9f0;
+}
+.project-container .ai-btn,
+.project-container .wheater-btn,
+.projectNone .projectNone-btn,
+.AiInfo-box .AI-back,.weatherInfo-box .weather-back {
+  background: linear-gradient(135deg,#168eae,#326ee6); border: 0; border-radius: 12px;
+  box-shadow: 0 7px 18px #168eae30; transition: transform .2s,filter .2s,box-shadow .2s;
+}
+.project-container .ai-btn:hover,
+.project-container .wheater-btn:hover,
+.projectNone .projectNone-btn:hover,
+.AiInfo-box .AI-back:hover,.weatherInfo-box .weather-back:hover {
+  filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 10px 24px #168eae45;
+}
+.Header { background: #111c2a; border: 1px solid #26384e; box-shadow: 0 0 30px #0003; }
+.Header .navbar-item::before { background: #168eae; }
+.projectNone,.AiInfo-box .AiInfo-infoBoxes,.AiInfo-box .weatherInfo-infoBoxes {
+  background: #152234; border-color: #2a3d54;
+}
+@media (max-width:699px) {
+  .main-navbar { margin-left: 16px; margin-right: 16px; }
+  .project-container .ai-project,.project-container .wheater-project { border-radius: 18px; }
+}
